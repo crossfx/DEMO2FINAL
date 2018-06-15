@@ -1,0 +1,59 @@
+{
+  "project_info": {
+    "project_number": "1656751383",
+    "firebase_url": "https://camerademo-5d606.firebaseio.com",
+    "project_id": "camerademo-5d606",
+    "storage_bucket": "camerademo-5d606.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1656751383:android:4e8c50a8bb4a3473",
+        "android_client_info": {
+          "package_name": "com.example.schen.camera"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1656751383-rrmfqq2t2majkuv1ofpdolg59lud3m2b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.schen.camera",
+            "certificate_hash": "e248cb23aa51b98e11ae9b7e03a6914808a122b1"
+          }
+        },
+        {
+          "client_id": "1656751383-88b73n3ov99vb1uclrda4inl6hk2dask.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "1656751383-88b73n3ov99vb1uclrda4inl6hk2dask.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVyB2dU3YpYkEa5Fy-Ih7FLJWXxT6AENE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1656751383-88b73n3ov99vb1uclrda4inl6hk2dask.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
