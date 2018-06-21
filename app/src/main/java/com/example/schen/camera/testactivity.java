@@ -132,21 +132,14 @@ public class testactivity extends AppCompatActivity {
                 Save (file,saveText);
 
                 //Firebase push data to database
-                dataMap.put("Description", (titlemessage));
-                dataMap.put("Image URL", uploadlocation.toString());
+                dataMap.put("description", (titlemessage));
+                dataMap.put("image", uploadlocation.toString());
                 dataMap.put("UID",userID.toString());
                 mDatabase.push().setValue(dataMap);
-
-
-
 
                 startActivity(intent);
 
             }
-
-
-
-
 
                 public void Save(File file, String[] data)
                 {
@@ -199,7 +192,7 @@ public class testactivity extends AppCompatActivity {
     }
 
 
-    @Override
+    /*@Override
     protected void onStart() {
         super.onStart();
         mDatabase.addValueEventListener(new ValueEventListener() {
@@ -207,7 +200,7 @@ public class testactivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 for (DataSnapshot imagesnapshot:dataSnapshot.getChildren());
-                
+
             }
 
             @Override
@@ -217,7 +210,7 @@ public class testactivity extends AppCompatActivity {
         });
 
 
-    }
+    }*/
 }
 
 

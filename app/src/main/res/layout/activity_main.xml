@@ -26,14 +26,14 @@
 
             <Button
                 android:id="@+id/opencambtn"
-                android:layout_width="286dp"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
                 android:backgroundTint="#3879eb"
                 android:text="Open Camera"
                 android:textColor="@android:color/white"
-                android:textSize="24sp"
+                android:textSize="22sp"
                 android:typeface="monospace" />
 
             <Button
@@ -44,7 +44,7 @@
                 android:backgroundTint="@color/colorAccent"
                 android:text="Signout"
                 android:textColor="@color/common_google_signin_btn_text_dark_default"
-                android:textSize="24sp"
+                android:textSize="22sp"
                 android:typeface="monospace" />
 
         </LinearLayout>

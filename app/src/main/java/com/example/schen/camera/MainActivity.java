@@ -1,46 +1,47 @@
 package com.example.schen.camera;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.ContactsContract;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Base64;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
-
+import android.widget.TextView;
 import com.example.schen.camera.Adapter.EasyAdapter;
 import com.example.schen.camera.Adapter.MyData;
-import com.google.android.gms.common.internal.Constants;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-
-import java.io.ByteArrayOutputStream;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
 
     ListView mListView;
+    RecyclerView mRecycle;
     EasyAdapter mAdapter;
     List<MyData> mDataList = new ArrayList<>();
     private FirebaseAuth firebaseAuth;
+    private FirebaseDatabase firebasestor;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +51,10 @@ public class MainActivity extends AppCompatActivity {
         Button signoutBTN = findViewById(R.id.signoutbtn);
 
         firebaseAuth = FirebaseAuth.getInstance();
+        firebasestor = FirebaseDatabase.getInstance();
+        final DatabaseReference mRef = firebasestor.getReference("Photo details");
+
+        final HashMap <String, String> dataMap = new HashMap<String,String>();
 
         opencamBTN.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,17 +67,54 @@ public class MainActivity extends AppCompatActivity {
         signoutBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //logging out the user
+                /*//logging out the user
                 firebaseAuth.signOut();
                 //closing activity
                 finish();
 
-                startActivity(new Intent(getApplicationContext(), login.class));
+                startActivity(new Intent(getApplicationContext(), login.class));*/
+
+                dataMap.put("UID","yolo hello");
+                mRef.push().setValue(dataMap);
+
+
+                mRef.addChildEventListener(new ChildEventListener() {
+
+                    @Override
+                    public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                        String childvalue = String.valueOf(dataSnapshot.getValue());
+
+
+                    }
+
+                    @Override
+                    public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                    }
+
+                    @Override
+                    public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+                    }
+
+                    @Override
+                    public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+
             }
         });
 
 
         mListView = findViewById(R.id.listView1);
+//        mRecycle = findViewById(R.id.recycle);
 
         try {
             generateData();
@@ -147,6 +189,8 @@ public class MainActivity extends AppCompatActivity {
         mAdapter = new EasyAdapter(this, mDataList);
         //Set the adapter with MyData list to the listView;
         mListView.setAdapter(mAdapter);
+        //mRecycle.setAdapter(mAdapter);
+
     }
 
 

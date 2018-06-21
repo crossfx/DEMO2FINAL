@@ -9,11 +9,21 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.schen.camera.Adapter.PostListActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
 
 public class login extends AppCompatActivity {
 
@@ -23,7 +33,6 @@ public class login extends AppCompatActivity {
     private Button buttonSignup;
     private Button buttonlogin;
     private ProgressDialog progressDialog;
-
 
     //defining firebaseauth object
     private FirebaseAuth firebaseAuth;
@@ -43,6 +52,7 @@ public class login extends AppCompatActivity {
         buttonSignup = findViewById(R.id.signupBtn);
         buttonlogin = findViewById(R.id.loginBtn);
 
+
         progressDialog = new ProgressDialog(this);
 
         //attaching listener to button
@@ -59,6 +69,7 @@ public class login extends AppCompatActivity {
                 loginUser();
             }
         });
+
 
     }
 
@@ -144,6 +155,7 @@ public class login extends AppCompatActivity {
                 if (task.isSuccessful()){
                     finish();
                     startActivity(new Intent(getApplicationContext(),MainActivity.class));
+
                 }
                 else {
                     Toast.makeText(login.this,"Either your email or password is incorrect",Toast.LENGTH_LONG).show();
