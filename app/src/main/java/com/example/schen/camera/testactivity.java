@@ -14,8 +14,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.schen.camera.Adapter.PostListActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -29,6 +31,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Request;
 
@@ -65,11 +68,9 @@ public class testactivity extends AppCompatActivity {
         setContentView(R.layout.activity_testactivity);
         final EditText descptext;
         Button testbtn;
-        Button readbtn;
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Photo details");
         storage.getReference();
-
 
         testbtn = findViewById(R.id.savebutton);
 
@@ -87,6 +88,7 @@ public class testactivity extends AppCompatActivity {
         final String userID = FirebaseAuth.getInstance().getUid();
         final String filename=filepath.getLastPathSegment();
         UploadTask uploadTask = uploadlocation.putFile(filepath);
+
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception exception) {
@@ -101,8 +103,20 @@ public class testactivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(Uri uri) {
                         ImageView iv1 = findViewById(R.id.annotateimage);
-                        String imageuri = uri.toString();
-                        Picasso.get().load(String.valueOf(imageuri)).into(iv1);
+                        String blah= uri.toString();
+                        Picasso.get().load(String.valueOf(blah)).into(iv1, new Callback() {
+                            @Override
+                            public void onSuccess() {
+                                ProgressBar progressBar1 = findViewById(R.id.progress);
+                                progressBar1.setVisibility(View.GONE);
+                            }
+
+                            @Override
+                            public void onError(Exception e) {
+
+                            }
+                        });
+
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -116,13 +130,12 @@ public class testactivity extends AppCompatActivity {
         File dir = new File(String.valueOf(storageDir1));
         dir.mkdirs();
 
-
         testbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(testactivity.this,MainActivity.class);
-                String titlemessage = descptext.getText().toString();
-                HashMap <String, String> dataMap = new HashMap<String,String>();
+                Intent intent = new Intent(testactivity.this,PostListActivity.class);
+                final String titlemessage = descptext.getText().toString();
+                final HashMap <String, String> dataMap = new HashMap<String,String>();
 
                 File file = new File(storageDir2+"/titledescp.txt");
                 String [] saveText = String.valueOf(titlemessage).split(System.getProperty("line.separator"));
@@ -131,11 +144,24 @@ public class testactivity extends AppCompatActivity {
 
                 Save (file,saveText);
 
-                //Firebase push data to database
-                dataMap.put("description", (titlemessage));
-                dataMap.put("image", uploadlocation.toString());
-                dataMap.put("UID",userID.toString());
-                mDatabase.push().setValue(dataMap);
+                StorageReference imageloc = storageRef.child(filename);
+                imageloc.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        ImageView iv1 = findViewById(R.id.annotateimage);
+                        String imageurl= uri.toString();
+                        dataMap.put("description", (titlemessage));
+                        dataMap.put("image", imageurl);
+                        dataMap.put("uid",userID.toString());
+                        mDatabase.push().setValue(dataMap);
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        // Handle any errors
+                    }
+                });
 
                 startActivity(intent);
 
@@ -192,25 +218,7 @@ public class testactivity extends AppCompatActivity {
     }
 
 
-    /*@Override
-    protected void onStart() {
-        super.onStart();
-        mDatabase.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                for (DataSnapshot imagesnapshot:dataSnapshot.getChildren());
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-
-    }*/
 }
 
 

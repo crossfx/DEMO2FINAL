@@ -1,41 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardBackgroundColor="#fff"
+    app:cardBackgroundColor="#FFF"
     app:cardCornerRadius="3dp"
-    app:contentPadding="5dp">
+    app:contentPadding="5dp"
+    >
 
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
 
     <TextView
         android:id="@+id/rtitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Title"
-        android:textColor="#000"
-        android:textStyle="bold"/>
+        android:textColor="#FFF"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:textSize="1dp"/>
 
     <ImageView
         android:id="@+id/rIV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
-        android:background="@drawable/loading"
         android:scaleType="centerCrop" />
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:visibility="visible" />
+
     <TextView
-        android:id="@+id/rdescp"
+    android:id="@+id/rdescp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:textSize="20sp"
-    android:text="This will be the description of the post"/>
-
-
+    android:text="This will be the description of the post"
+    android:textAlignment="center"
+        android:textColor="#000000"/>
 
 
 </LinearLayout>

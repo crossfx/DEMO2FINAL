@@ -4,82 +4,116 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="#3E5AA3"
     android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen"
-    tools:context=".login">
+    tools:context=".login"
+    android:id="@+id/relative1"
+    android:animateLayoutChanges="true">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="346dp"
-        android:layout_alignParentStart="true"
-        android:layout_centerVertical="true"
-        android:orientation="vertical">
-
+    <RelativeLayout
+        android:id="@+id/relative3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:animateLayoutChanges="true"
+        >
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="76dp"
+            android:id="@+id/img"
+            android:layout_width="110dp"
+            android:layout_height="80dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
             android:src="@drawable/image" />
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="55dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="5dp"
-            android:fadingEdge="none"
-            android:gravity="center_horizontal"
-            android:text="Chenstagram"
-            android:textAllCaps="false"
-            android:textColor="@color/common_google_signin_btn_text_dark_default"
-            android:textSize="36sp"
-            android:textStyle="normal"
-            app:fontFamily="monospace" />
+        <RelativeLayout
+            android:id="@+id/relative2"
+            android:layout_width="346dp"
+            android:layout_height="229dp"
+            android:layout_below="@+id/img"
+            android:visibility="gone"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/pass"
+                    android:fadingEdge="none"
+                    android:text="Chenstagram"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:textColor="@color/common_google_signin_btn_text_dark_default"
+                    android:textSize="36sp"
+                    android:textStyle="normal"
+                    app:fontFamily="serif-monospace" />
+
+                <EditText
+                    android:id="@+id/email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_centerVertical="true"
+                    android:ems="10"
+                    android:gravity="center_vertical"
+                    android:hint="enter your email"
+                    android:inputType="textPersonName"
+                    android:textAlignment="center" />
+
+                <EditText
+                    android:id="@+id/pass"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/email"
+
+                    android:ems="10"
+                    android:gravity="center_vertical"
+                    android:hint="enter your password"
+                    android:inputType="textPersonName"
+                    android:textAlignment="center" />
 
 
-        <EditText
-            android:id="@+id/email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:gravity="center_vertical"
-            android:hint="enter your email"
-            android:inputType="textPersonName"
-            android:textAlignment="center" />
-
-        <EditText
-            android:id="@+id/pass"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:ems="10"
-            android:gravity="center_vertical"
-            android:hint="enter your password"
-            android:inputType="textPersonName"
-            android:textAlignment="center" />
-
-        <Button
-            android:id="@+id/signupBtn"
-            android:layout_width="match_parent"
-            android:layout_height="51dp"
-            android:layout_marginTop="8dp"
-            android:gravity="center_vertical"
-            android:text="Sign Up"
-            android:textAlignment="center"
-            android:typeface="monospace" />
-
-        <Button
-            android:id="@+id/loginBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:gravity="center_vertical"
-            android:text="Login"
-            android:textAlignment="center"
-            android:typeface="monospace" />
+            </LinearLayout>
 
 
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/signupBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="51dp"
+                    android:text="Sign Up"
+                    android:textAlignment="center"
+                    android:typeface="monospace" />
+
+                <Button
+                    android:id="@+id/loginBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Login"
+                    android:textAlignment="center"
+                    android:typeface="monospace" />
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
 
 
 </RelativeLayout>
